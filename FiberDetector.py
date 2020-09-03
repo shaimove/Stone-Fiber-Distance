@@ -1,4 +1,4 @@
-# Main.py
+# FiberDetector.py
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
@@ -37,25 +37,6 @@ plt.subplot(2, 3, 2); plt.imshow(img_g, cmap='gray')
 plt.subplot(2, 3, 3); plt.imshow(img_g_rgb, cmap='gray')
 plt.subplot(2, 3, 4); plt.imshow(img_thresh, cmap='gray')
 plt.subplot(2, 3, 5); plt.imshow(img_thresh, cmap='gray')
-
-#%% Find stone
-img1 = cv2.GaussianBlur(images[0],(5,5),sigmaX = 3) 
-img2 = cv2.GaussianBlur(images[1],(5,5),sigmaX = 3) 
-
-ROI = cv2.selectROI(img1)
-img1_crop = img1[int(ROI[1]):int(ROI[1]+ROI[3]), int(ROI[0]):int(ROI[0]+ROI[2])]
-
-img2_corr = signal.correlate(img2,img1_crop,mode='full')[:,:,0]
-img2_corr = signal.convolve(img2,img1_crop,mode='full')[:,:,0]
-
-#%% 
-plt.figure()
-plt.subplot(2, 3, 1); plt.imshow(img1)
-plt.subplot(2, 3, 2); plt.imshow(img2)
-plt.subplot(2, 3, 3); plt.imshow(img1_crop)
-plt.subplot(2, 3, 4); plt.imshow(img2_corr, cmap='gray')
-
-
 
 
 
