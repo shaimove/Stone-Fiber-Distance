@@ -64,14 +64,14 @@ for i,img in tqdm(enumerate(images[1:])):
     if ok:
         # Tracking success
         # Draw rectangle
-        p1 = (int(bbox[0]), int(bbox[1])) # top left
-        p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3])) # bottom right
-        cv2.rectangle(img, p1, p2, (255,0,0), 2, 1)
+        #p1 = (int(bbox[0]), int(bbox[1])) # top left
+        #p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3])) # bottom right
+        #cv2.rectangle(img, p1, p2, (255,0,0), 2, 1)
         
         # Draw circle
-        #p_center = (int(bbox[0] + bbox[2]/2) , int(bbox[1] + bbox[3]/2))
-        #p_radius = int((bbox[2] + bbox[3])/4)
-        #cv2.circle(img,p_center,p_radius,(255,0,0),2)
+        p_center = (int(bbox[0] + bbox[2]/2) , int(bbox[1] + bbox[3]/2))
+        p_radius = int((bbox[2] + bbox[3])/4)
+        cv2.circle(img,p_center,p_radius,(255,0,0),2)
     else:
         # Tracking failure
         cv2.putText(img, "Tracking failure detected", (100,80), 

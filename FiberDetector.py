@@ -9,26 +9,42 @@ from tqdm import tqdm
 plt.close('all')
 
 #%% Reading images
-folder = '4'
-path = '../Data/' + folder
-images=[]
+folder = '6'
+threshold = 1.2
+flag_to_save = True
 
-for filename in os.listdir(path):
+
+
+#%% Read files
+path = '../Data/' + folder
+images = []
+
+for filename in tqdm(os.listdir(path)):
     img = plt.imread(os.path.join(path , filename))
+    img = cv2.GaussianBlur(img, (5,5), sigmaX = 1)
     images.append(img)                              
 
 #%% find fiber at any images
-kernel = np.ones((3,3),np.uint8)
+kernel = np.ones((7,7),np.uint8)
 img_fiber = []
+path_to_save = path + '_fiber'
+
+if flag_to_save:
+    os.mkdir(path_to_save)
+
 
 for i,img in tqdm(enumerate(images)):
     img_g = img[:,:,1]
     img_g_rgb = (img_g / np.mean(img,axis=2)) 
-    img_thresh = np.uint8(img_g_rgb > 1.15)
+    img_thresh = np.uint8(img_g_rgb > threshold)
     img_close = cv2.morphologyEx(img_thresh, cv2.MORPH_CLOSE, kernel) * 255
+    img_close2 = np.repeat(np.expand_dims(img_close, axis=2),3,axis=2)
     img_fiber.append(img_close)
     loc_to_save = path + '_fiber/' + os.listdir(path)[i]
-    cv2.imwrite(loc_to_save,img_close)
+    img_save = np.concatenate((img_close2, img), axis=1)
+    
+    if flag_to_save:
+        cv2.imwrite(loc_to_save,img_save)
 
 #%% Plot stages in tracking fiber
 plt.figure()
