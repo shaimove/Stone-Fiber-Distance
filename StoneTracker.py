@@ -84,7 +84,6 @@ for i,img in tqdm(enumerate(images[1:])):
     
 cv2.destroyAllWindows() 
 
-print(loc_to_save)
 
 
 
