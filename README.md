@@ -28,7 +28,7 @@ The algorithm includes the following steps (TrackerMain.py):
 ## Results
 On the right side, you can see the detection of the stone on the original image, on the left side you can see the binary image with the stone and the fiber detection.
 
- ![Image 11](https://github.com/shaimove/Automatic-Ablation-Volume-Estimation/blob/master/Imgaes/Result%203.png)
+ ![Image 11](https://github.com/shaimove/Stone-Fiber-Distance/blob/master/frame1621.jpg)
   
 
 ## License
